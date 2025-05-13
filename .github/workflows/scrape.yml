@@ -2,11 +2,11 @@ name: Daily IDRC Funding Scraper
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # Runs daily at 08:00 UTC
-  workflow_dispatch:      # Allow manual trigger
+    - cron: '*/2 * * * *'  # Runs every 5 minutes
+  workflow_dispatch:        # Allows manual run from UI
 
 permissions:
-  contents: write  # 👈 Required to allow git push
+  contents: write           # Needed to allow git commit/push
 
 jobs:
   build:
@@ -29,10 +29,20 @@ jobs:
       run: |
         python scrape_idrc_funding.py
 
+    - name: Debug output
+      run: |
+        echo "✅ Listing directory contents:"
+        ls -lh
+
     - name: Commit and push results
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add idrc_funding_opportunities_detailed.csv
-        git commit -m "Update scraped data [$(date)]" || echo "No changes"
-        git push
+
+        if [ -f idrc_funding_opportunities_detailed.csv ]; then
+          git add idrc_funding_opportunities_detailed.csv
+          git commit -m "Update scraped data on $(date)" || echo "No changes"
+          git push
+        else
+          echo "❌ CSV file not found. Skipping commit."
+        fi
