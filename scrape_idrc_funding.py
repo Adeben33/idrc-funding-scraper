@@ -58,11 +58,12 @@ for block in funding_blocks:
         "URL": url,
         "Deadline": deadline,
         "Call For": call_for,
-        "Opportunity Status": status
+        "Opportunity Status": status,
+        "Source": "IDRC - CRDI"
     })
 
 # --- Save to CSV ---
 df = pd.DataFrame(funding_data)
 df.to_csv("idrc_funding_status.csv", index=False)
 
-print("✅ Scraping done — check 'idrc_funding_status.csv' for 'Call For' and 'Opportunity Status'")
+print("✅ Scraping done — check 'idrc_funding_status.csv' for 'Call For', 'Opportunity Status', and 'Source'")
