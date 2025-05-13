@@ -36,5 +36,3 @@ jobs:
         git add idrc_funding_opportunities_detailed.csv
         git commit -m "Update scraped data [$(date)]" || echo "No changes"
         git push
-        
-        - name: Commit and push results
