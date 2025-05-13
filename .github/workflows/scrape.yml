@@ -2,7 +2,7 @@ name: Daily IDRC Funding Scraper
 
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Runs every 5 minutes
+    - cron: '0 8 * * *'   # Every day at 08:00 UTC
   workflow_dispatch:        # Allows manual run from UI
 
 permissions:
