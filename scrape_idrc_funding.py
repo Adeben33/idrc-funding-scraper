@@ -59,6 +59,6 @@ for block in funding_blocks:
 
 # --- Save new file (no duplicate logic for simplicity here) ---
 df = pd.DataFrame(funding_data)
-df.to_csv("idrc_funding_opportunities_detailed..csv", index=False)
+df.to_csv("idrc_funding_opportunities_detailed.csv", index=False)
 
-print("✅ Scraping done — check 'Opportunity Status' in 'idrc_funding_opportunities_detailed..csv'")
+print("✅ Scraping done — check 'Opportunity Status' in 'idrc_funding_opportunities_detailed.csv'")
