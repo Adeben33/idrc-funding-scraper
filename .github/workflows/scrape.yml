@@ -41,6 +41,7 @@ jobs:
 
         if [ -f idrc_funding_opportunities_detailed.csv ]; then
           git add idrc_funding_opportunities_detailed.csv
+          git add idrc_funding_data.json
           git commit -m "Update scraped data on $(date)" || echo "No changes"
           git push
         else
