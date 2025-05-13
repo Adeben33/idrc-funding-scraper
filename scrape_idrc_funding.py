@@ -43,6 +43,9 @@ for block in funding_blocks:
     deadline_tag = block.select_one("div.views-field-field-award-deadline time")
     deadline = deadline_tag.get_text(strip=True) if deadline_tag else 'N/A'
 
+    call_for_tag = block.select_one("div.views-field-field-award-call-for span.field-content")
+    call_for = call_for_tag.get_text(strip=True) if call_for_tag else 'N/A'
+
     # Parse deadline and determine opportunity status
     try:
         deadline_date = datetime.strptime(deadline, "%B %d, %Y")
@@ -54,13 +57,12 @@ for block in funding_blocks:
         "Title": title,
         "URL": url,
         "Deadline": deadline,
+        "Call For": call_for,
         "Opportunity Status": status
     })
 
-# --- Save new file (no duplicate logic for simplicity here) ---
+# --- Save to CSV ---
 df = pd.DataFrame(funding_data)
-df.to_csv("idrc_funding_opportunities_detailed.csv", index=False)
-df.to_json("idrc_funding_data.json", orient="records")
+df.to_csv("idrc_funding_status.csv", index=False)
 
-
-print("✅ Scraping done — check 'Opportunity Status' in 'idrc_funding_opportunities_detailed.csv'")
+print("✅ Scraping done — check 'idrc_funding_status.csv' for 'Call For' and 'Opportunity Status'")
